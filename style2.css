@@ -69,14 +69,14 @@ body {
     border: 1px solid rgb(180, 171, 171);
 }
 
-.menu-item1,
+/* .menu-item1,
 .menu-item2,
 .menu-item3,
 .menu-item4 {
     height: 100%;
     width: 25%;
     border: 2px solid rgb(180, 171, 171);
-}
+} */
 
 /* Main Content */
 .main-content {
