@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced Stock Screener with Charts</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d1117;
+      color: #e6e6e6;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0a0f1c;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #1f3b73;
+    }
+
+    header h1 {
+      color: #1f7aff;
+      font-size: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+      background: #111827;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #1f7aff40;
+    }
+
+    .filters input {
+      padding: 10px;
+      border: 1px solid #1f7aff;
+      border-radius: 5px;
+      background: #0d1117;
+      color: #e6e6e6;
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .filters button {
+      background: #1f7aff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .filters button:hover {
+      background: #155ab6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #111827;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 15px #1f7aff40;
+      margin-bottom: 40px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    table thead {
+      background: #1f7aff;
+    }
+
+    table thead th {
+      padding: 15px;
+      text-align: center;
+      color: white;
+    }
+
+    table tbody tr {
+      border-bottom: 1px solid #1f3b73;
+    }
+
+    table tbody tr:hover {
+      background: #1a2338;
+    }
+
+    table tbody td {
+      padding: 15px;
+      text-align: center;
+      color: #e6e6e6;
+    }
+
+    canvas {
+      background: #111827;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 40px;
+      box-shadow: 0 0 15px #1f7aff40;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .filters {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>STOCKS HUB</h1>
+</header>
+
+<div class="container">
+  <div class="filters">
+    <input type="text" id="symbolFilter" placeholder="Filter by Symbol (e.g., AAPL)" />
+    <input type="number" id="priceFilter" placeholder="Max Price (e.g., 500)" />
+    <input type="number" id="marketCapFilter" placeholder="Min Market Cap (e.g., 1000000000)" />
+    <button onclick="applyFilters()">Apply Filters</button>
+    <button onclick="resetFilters()">Reset</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Market Cap</th>
+        <th>PE Ratio</th>
+        <th>PB Ratio</th>
+        <th>Intrinsic Value</th>
+        <th>Dividend Yield</th>
+        <th>52 Week High</th>
+        <th>52 Week Low</th>
+        <th>Sector</th>
+        <th>EPS</th>
+      </tr>
+    </thead>
+    <tbody id="stockTableBody">
+      <!-- Stock rows will go here -->
+    </tbody>
+  </table>
+
+  <canvas id="priceTrendChart" height="100"></canvas>
+  <canvas id="marketCapChart" height="100"></canvas>
+</div>
+
+<script>
+  const stockData = [
+    { symbol: "AAPL", name: "Apple Inc.", price: 172.14, marketCap: 2850000000000, peRatio: 28.5, pbRatio: 35.1, intrinsicValue: 165.00, dividendYield: "0.55%", high52Week: 182.94, low52Week: 124.17, sector: "Technology", eps: 6.11, history: [150, 155, 160, 165, 170, 172] },
+    { symbol: "GOOGL", name: "Alphabet Inc.", price: 135.45, marketCap: 1750000000000, peRatio: 23.3, pbRatio: 6.1, intrinsicValue: 140.00, dividendYield: "0%", high52Week: 151.55, low52Week: 83.45, sector: "Communication Services", eps: 5.76, history: [120, 125, 130, 132, 134, 135] },
+    { symbol: "MSFT", name: "Microsoft Corp.", price: 295.36, marketCap: 2200000000000, peRatio: 34.2, pbRatio: 12.5, intrinsicValue: 310.00, dividendYield: "0.88%", high52Week: 305.22, low52Week: 212.03, sector: "Technology", eps: 8.05, history: [250, 260, 270, 280, 290, 295] },
+    { symbol: "AMZN", name: "Amazon.com Inc.", price: 125.12, marketCap: 1270000000000, peRatio: 59.4, pbRatio: 8.9, intrinsicValue: 130.00, dividendYield: "0%", high52Week: 145.86, low52Week: 81.43, sector: "Consumer Discretionary", eps: 2.14, history: [100, 110, 115, 120, 123, 125] },
+    { symbol: "TSLA", name: "Tesla Inc.", price: 210.11, marketCap: 670000000000, peRatio: 52.1, pbRatio: 14.2, intrinsicValue: 220.00, dividendYield: "0%", high52Week: 293.34, low52Week: 152.37, sector: "Consumer Discretionary", eps: 4.23, history: [180, 190, 200, 205, 208, 210] },
+  ];
+
+  function displayStocks(data) {
+    const tableBody = document.getElementById("stockTableBody");
+    tableBody.innerHTML = "";
+
+    data.forEach(stock => {
+      const row = `
+        <tr>
+          <td>${stock.symbol}</td>
+          <td>${stock.name}</td>
+          <td>$${stock.price.toFixed(2)}</td>
+          <td>$${(stock.marketCap / 1e9).toFixed(2)} B</td>
+          <td>${stock.peRatio}</td>
+          <td>${stock.pbRatio}</td>
+          <td>$${stock.intrinsicValue}</td>
+          <td>${stock.dividendYield}</td>
+          <td>$${stock.high52Week}</td>
+          <td>$${stock.low52Week}</td>
+          <td>${stock.sector}</td>
+          <td>${stock.eps}</td>
+        </tr>
+      `;
+      tableBody.innerHTML += row;
+    });
+  }
+
+  function applyFilters() {
+    const symbolFilter = document.getElementById("symbolFilter").value.toUpperCase();
+    const priceFilter = parseFloat(document.getElementById("priceFilter").value);
+    const marketCapFilter = parseFloat(document.getElementById("marketCapFilter").value);
+
+    const filteredData = stockData.filter(stock => {
+      return (
+        (symbolFilter ? stock.symbol.includes(symbolFilter) : true) &&
+        (!isNaN(priceFilter) ? stock.price <= priceFilter : true) &&
+        (!isNaN(marketCapFilter) ? stock.marketCap >= marketCapFilter : true)
+      );
+    });
+
+    displayStocks(filteredData);
+    updateCharts(filteredData);
+  }
+
+  function resetFilters() {
+    document.getElementById("symbolFilter").value = "";
+    document.getElementById("priceFilter").value = "";
+    document.getElementById("marketCapFilter").value = "";
+    displayStocks(stockData);
+    updateCharts(stockData);
+  }
+
+  function updateCharts(data) {
+    const labels = data.map(stock => stock.symbol);
+    const prices = data.map(stock => stock.price);
+    const marketCaps = data.map(stock => stock.marketCap / 1e9);
+
+    priceChart.data.labels = labels;
+    priceChart.data.datasets[0].data = prices;
+    priceChart.update();
+
+    marketCapChart.data.labels = labels;
+    marketCapChart.data.datasets[0].data = marketCaps;
+    marketCapChart.update();
+  }
+
+  const priceChartCtx = document.getElementById("priceTrendChart").getContext("2d");
+  const marketCapChartCtx = document.getElementById("marketCapChart").getContext("2d");
+
+  const priceChart = new Chart(priceChartCtx, {
+    type: 'bar',
+    data: {
+      labels: stockData.map(stock => stock.symbol),
+      datasets: [{
+        label: 'Stock Price ($)',
+        backgroundColor: '#1f7aff',
+        data: stockData.map(stock => stock.price),
+      }]
+    }
+  });
+
+  const marketCapChart = new Chart(marketCapChartCtx, {
+    type: 'bar',
+    data: {
+      labels: stockData.map(stock => stock.symbol),
+      datasets: [{
+        label: 'Market Cap (Billion $)',
+        backgroundColor: '#00c9a7',
+        data: stockData.map(stock => stock.marketCap / 1e9),
+      }]
+    }
+  });
+
+  displayStocks(stockData);
+</script>
+
+</body>
+</html>
