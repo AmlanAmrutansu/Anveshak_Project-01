@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document5</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d0b14;
+            color: white;
+            width: 100%;
+        }
+
+        .page-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 30px;
+            background-color: #151522;
+            border-bottom: 2px solid #7151f5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            height: 120px;
+        }
+
+        .header-left,
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container img {
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            border: 2px solid #7151f5;
+            box-shadow: 0 0 10px rgba(113, 81, 245, 0.8);
+        }
+
+        .settings-icon {
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .settings-icon i {
+            font-size: 24px;
+            color: #7151f5;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding-top: 30px;
+        }
+
+        .main-content1,
+        .main-content2 {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            padding-top: 30px;
+        }
+
+        .main-content1 {
+            height: 400px;
+            margin-bottom: 20px;
+        }
+
+        .main-content2 {
+            height: 400px;
+        }
+
+        .grid-row1,
+        .grid-row2,
+        .grid-row3,
+        .grid-row4,
+        .grid-row5,
+        .grid-row6 {
+            width: 400px;
+            height: 290px;
+            border: 1px solid #7151f5;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .grid-row1,
+        .grid-row2,
+        .grid-row3 {
+            margin-bottom: 20px;
+        }
+
+        .grid-row1:hover,
+        .grid-row2:hover,
+        .grid-row3:hover,
+        .grid-row4:hover,
+        .grid-row5:hover,
+        .grid-row6:hover {
+            transform: scale(1.05);
+        }
+
+        .footer-container {
+            background-color: #151522;
+            padding: 20px;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-button {
+            padding: 10px 20px;
+            background-color: #7151f5;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .footer-button:hover {
+            background-color: #957dfa;
+        }
+
+        .footer-icon {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 30px;
+            color: #7151f5;
+            cursor: pointer;
+        }
+
+        .footer-icon:hover {
+           color: #957dfa;
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="header-container">
+            <div class="header-left"></div>
+            <img class="logo" src="logo.jpg" alt="Logo">
+            <div class="header-right">
+                <div class="settings-icon">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="main-content1">
+                <span class="grid-row1">
+                    <iframe width="400" height="290" src="https://www.youtube.com/embed/videoseries?si=zlFEV6JXH_qkeCTA&amp;list=PLxNHpNhDaEFLngQFq3dIQvQO2hPZdAE8t" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </span>
+                <span class="grid-row2">
+                    <iframe width="400" height="290" src="https://www.youtube.com/embed/3WI9RZODuag?si=_Q_E9WkYKdsXDwN8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </span>
+                <span class="grid-row3">
+                    <iframe width="400" height="290" src="https://www.youtube.com/embed/Xn7KWR9EOGQ?si=p7jQVKkoZ7aDUXWI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </span>
+            </div>
+            <div class="main-content2">
+                <span class="grid-row4">
+                    <iframe width="400" height="290" src="https://www.youtube.com/embed/fBhZ1xz5rIw?si=AGPNamUuLiNNPqps" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </span>
+                <span class="grid-row5">
+                    <iframe width="400" height="290" src="https://www.youtube.com/embed/3UF0ymVdYLA?si=ql96HMGVp5Jcdtlz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </span>
+                <span class="grid-row6">
+                    <iframe width="400" height="290" src="https://www.youtube.com/embed/XDtWSmnDLEs?si=7sxojeAViZGHbxeV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </span>
+            </div>
+        </div>
+        
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <button class="footer-button">Click</button>
+            </div>
+            <div class="footer-icon">
+                <i class="fa-solid fa-circle-left"></i>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openNewTab() {
+            window.open('intex1.html', '_self');
+        }
+
+        document.querySelector('.footer-icon').addEventListener('click', openNewTab);
+    </script>
+</body>
+</html>
