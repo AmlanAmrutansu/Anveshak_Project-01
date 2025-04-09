@@ -8,148 +8,150 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0d0b14;
-            color: white;
-            width: 100%;
-        }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0d0b14;
+    color: white;
+    width: 100%;
+}
 
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 30px;
-            background-color: #151522;
-            border-bottom: 2px solid #7151f5;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        }
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    background-color: #151522;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
 
-        .header-left,
-        .header-right {
-            display: flex;
-            align-items: center;
-        }
+.header-left,
+.header-right {
+    display: flex;
+    align-items: center;
+}
 
-        .header-container img {
-            height: 60px;
-            width: 60px;
-            border-radius: 50%;
-            border: 2px solid #7151f5;
-            box-shadow: 0 0 10px rgba(113, 81, 245, 0.8);
-        }
+.header-container img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(113, 81, 245, 0.8);
+}
 
-        .settings-icon {
-            cursor: pointer;
-            padding: 10px;
-        }
+.settings-icon {
+    cursor: pointer;
+    padding: 10px;
+}
 
-        .settings-icon i {
-            font-size: 24px;
-            color: #7151f5;
-        }
+.settings-icon i {
+    font-size: 24px;
+    color: #1f7aff;
+}
 
-        .navigation-menu {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px;
-            background-color: #1e1e2f;
-            border-bottom: 2px solid #7151f5;
-        }
+.navigation-menu {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #1e1e2f;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
 
-        .navigation-menu > div {
-            padding: 10px 20px;
-            background-color: #2a2a3d;
-            color: white;
-            border: 1px solid #7151f5;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.navigation-menu > div {
+    padding: 10px 20px;
+    background-color: #2a2a3d;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(31, 122, 255, 0.4);
+}
 
-        .navigation-menu > div:hover {
-            background-color: #7151f5;
-            color: white;
-        }
+.navigation-menu > div:hover {
+    background-color: #1f7aff;
+    color: white;
+}
 
-        .main-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 450px;
-            padding: 30px;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: white;
-            font-size: 32px;
-            font-weight: bold;
-            border-bottom: 2px solid #7151f5;
-        }
+.main-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 450px;
+    padding: 30px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
 
-        .list-container {
-            display: flex;
-            justify-content: space-evenly;
-            padding: 15px;
-            background-color: #1e1e2f;
-            border-bottom: 2px solid #7151f5;
-        }
+.list-container {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 15px;
+    background-color: #1e1e2f;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
 
-        .list-left,
-        .list-right {
-            width: 45%;
-            padding: 20px;
-            background-color: #2a2a3d;
-            border: 1px solid #7151f5;
-            border-radius: 12px;
-            color: white;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.list-left,
+.list-right {
+    width: 45%;
+    padding: 20px;
+    background-color: #2a2a3d;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(31, 122, 255, 0.2);
+}
 
-        .list-left:hover,
-        .list-right:hover {
-            background-color: #7151f5;
-            color: white;
-        }
+.list-left:hover,
+.list-right:hover {
+    background-color: #1f7aff;
+    color: white;
+}
 
-        .footer-container {
-            background-color: #151522;
-            padding: 20px;
-            color: white;
-        }
+.footer-container {
+    background-color: #151522;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
 
-        .footer-top {
-            height: 40px;
-            background-color: #1e1e2f;
-            border: 1px solid #7151f5;
-            border-radius: 12px;
-            margin-bottom: 10px;
-        }
+.footer-top {
+    height: 40px;
+    background-color: #1e1e2f;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 8px rgba(31, 122, 255, 0.4);
+}
 
-        .footer-bottom {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
+.footer-bottom {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+}
 
-        .footer-button {
-            padding: 10px 20px;
-            background-color: #7151f5;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.footer-button {
+    padding: 10px 20px;
+    background-color: #1f7aff;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
 
-        .footer-button:hover {
-            background-color: #957dfa;
-        }
+.footer-button:hover {
+    background-color: #957dfa;
+}
+
 
     </style>
 </head>
