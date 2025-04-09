@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Document6</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -12,61 +13,67 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #0d0b14;
       color: white;
+      width: 100%;
     }
 
-    /* Header */
+    .content-wrapper {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
     .header {
       height: 70px;
       background-color: #151522;
-      border-bottom: 2px solid #7151f5;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-      width: 100%;
+      
+      box-shadow: 0 0 10px #1f7aff40;
       border-radius: 10px;
       position: relative;
+      margin-top: 20px;
     }
 
-    /* Logo */
     .logo {
       position: absolute;
-      top: 40px; 
+      top: 40px;
       left: 50%;
       transform: translateX(-50%);
       height: 80px;
       width: 80px;
-      border: 2px solid #7151f5;
+      color: #1f7aff;
       border-radius: 50%;
       background-color: white;
       z-index: 10;
-      box-shadow: 0 0 10px rgba(113, 81, 245, 0.8);
+      box-shadow: 0 0 10px #1f7aff40;
     }
 
-    /* Top Boxes */
     .top-boxes {
-      margin-top: 60px;
+      margin-top: 100px;
       display: flex;
       justify-content: space-around;
-      padding: 10px;
+      padding: 10px 0;
       width: 100%;
-      max-width: 90%;
+      gap: 20px;
     }
 
     .box {
-      width: 45%;
+      width: 100%;
+      max-width: 500px;
       height: 60px;
       background-color: #2a2a3d;
-      border: 1px solid #7151f5;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      
+      border-radius: 12px;
+      box-shadow: 0 0 10px #1f7aff40;
+      transition: all 0.3s ease;
+      cursor: pointer;
     }
 
-    /* Bar Chart */
+    .box:hover {
+      background-color: #1f7aff;
+    }
+
     .bar-chart {
       display: flex;
       justify-content: space-around;
@@ -74,51 +81,54 @@
       height: 300px;
       padding: 10px;
       width: 100%;
-      max-width: 90%;
       background-color: #1e1e2f;
-      border: 2px solid #7151f5;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      
+      border-radius: 12px;
+      box-shadow: 0 0 10px #1f7aff40;
       margin-top: 20px;
     }
 
-    /* Content Box */
     .content-box {
       height: 120px;
-      margin: 10px;
       background-color: #2a2a3d;
-      border: 1px solid #7151f5;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+     
+      border-radius: 12px;
+      box-shadow: 0 0 10px #1f7aff40;
       width: 100%;
-      max-width: 90%;
       margin-top: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
     }
 
-    /* Footer */
+    .content-box:hover {
+      background-color: #1f7aff;
+    }
+
     .footer {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
       height: 50px;
-      border-top: 2px solid #7151f5;
+      
       background-color: #151522;
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      border-radius: 12px;
+      box-shadow: 0 0 10px #1f7aff40;
       margin-top: 20px;
-      position: relative;
+      padding: 0 20px;
     }
 
     .footer-button {
       width: 80px;
       height: 100%;
-      background-color: #7151f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #1f7aff;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 10px #1f7aff40;
       color: white;
     }
 
@@ -129,48 +139,46 @@
     .footer-icon {
       position: absolute;
       right: 20px;
-      bottom: 9px;
       font-size: 30px;
-      color: #7151f5;
+      color: #1f7aff;
       cursor: pointer;
+      transition: all 0.3s ease;
+      
     }
+
     .footer-icon:hover {
       color: #957dfa;
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <div class="header"></div>
+  <div class="content-wrapper">
+    <div class="header"></div>
+    <img class="logo" src="logo.jpg" alt="Logo">
 
-  <!-- Logo -->
-  <img class="logo" src="logo.jpg" alt="Logo">
+    <div class="top-boxes">
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
 
-  <!-- Two Boxes -->
-  <div class="top-boxes">
-    <div class="box"></div>
-    <div class="box"></div>
-  </div>
+    <div class="bar-chart"></div>
 
-  <!-- Bar Chart -->
-  <div class="bar-chart"></div>
+    <div class="content-box"></div>
 
-  <!-- Content Box -->
-  <div class="content-box"></div>
-
-  <!-- Footer -->
-  <div class="footer">
-    <button class="footer-button">Click</button>
-    <div class="footer-icon">
-      <i class="fa-solid fa-circle-left"></i>
+    <div class="footer">
+      <button class="footer-button">Click</button>
+      <div class="footer-icon">
+        <i class="fa-solid fa-circle-left"></i>
+      </div>
     </div>
   </div>
+
   <script>
     function openNewTab() {
-            window.open('intex1.html', '_self');
-        }
+      window.open('intex1.html', '_self');
+    }
 
-        document.querySelector('.footer-icon').addEventListener('click', openNewTab);
+    document.querySelector('.footer-icon').addEventListener('click', openNewTab);
   </script>
 </body>
 </html>
