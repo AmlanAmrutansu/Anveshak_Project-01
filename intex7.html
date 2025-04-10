@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document7</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    /* Container Setup */
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        background-color: #0d0b14;
+        color: white;
+    }
+    
+    /* Header */
+    .header-container {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 90%;
+        height: 100px;
+        color: white;
+        
+        border-radius: 10px;
+    }
+    
+    .header-left {
+        width: 100%;
+        height: 50px;
+        background-color: #151522;
+        margin-left: 6px;
+        margin-right: 30px;
+        box-shadow: 0 0 10px #1f7aff40;
+        border-radius: 10px;
+    }
+    .header-right{
+        display: flex;
+        
+        align-items: center;
+        
+    }
+    
+    .header-right h3 {
+        position: absolute;
+        left: 5%;
+        top: 62%;
+        margin-right: 20px;
+        font-size: 24px;
+        
+    }
+
+    .header-container img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 80px;
+        width: 80px;
+        
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 0 10px #1f7aff40;
+    }
+
+    .settings-icon {
+            cursor: pointer;
+            padding: 10px;
+        }
+
+    .settings-icon i {
+            position: absolute;
+            right: 20px;
+            font-size: 24px;
+            color: #1f7aff;
+    }
+    
+    
+    
+    /* Main Content */
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        height: 500px;
+       
+        color: white;
+        
+        border-radius: 10px;
+        
+       
+    }
+
+    .query{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        height: 90%;
+        background-color: #151522;
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #1f7aff40;
+        margin-bottom: 10px;
+        margin-top: 30px;
+    }
+    .que{
+        font-size: 25px;;
+        height: 90%;
+        width: 90%;
+        background-color: #151522;
+        color: white;
+        border: none;
+    }
+    .que:focus{
+        outline: none;
+
+    }
+
+    .btns{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    /* Footer */
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: #151522;
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #1f7aff40;
+        margin-top: 20px;
+        margin-left: 50%;
+        margin-right: 50%;
+    }
+    
+    .footer-bottom {
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 50px;
+        margin-bottom:0 ;
+        
+    }
+
+    .btn1,
+    .btns1,
+    .btns2 {
+            padding: 10px 20px;
+            background-color: #1f7aff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .b:hover {
+            background-color: #957dfa;
+        }
+    
+    .footer-icon {
+        position: absolute;
+        right: 20px;
+       
+        font-size: 30px;
+        color: #1f7aff;
+        cursor: pointer;
+    }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="header-container">
+        <div class="header-left"></div>
+        <img src="logo.jpg" alt="Logo">
+        <div class="header-right">
+            <h3>Query</h3>
+            <div class="settings-icon">
+                <i class="fa-solid fa-gear"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="query">
+            <textarea class="que" placeholder="Query"></textarea>
+        </div>
+        <div class="btns b">
+            <button class="btns1 b">Search</button>
+            <button class="btns2 b">Demo</button>
+        </div>
+    </div>
+    
+    
+    
+    <div class="footer-container">
+        <div class="footer-bottom">
+            <button class="btn1 b">1</button>
+            
+            <div class="footer-icon">
+                <i class="fa-solid fa-circle-left"></i>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

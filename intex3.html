@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document3</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    /* Container Setup */
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        background-color: #0d1117;
+        color: white;
+    }
+    
+    /* Header */
+    .header-container {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 100%;
+        height: 100px;
+        color: white;
+        
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    
+    .header-left {
+        width: 100%;
+        height: 50px;
+        background-color: #151522;
+        border: 2px solid #1f7aff;
+        box-shadow: 0 0 10px #1f7aff40;
+        border-radius: 10px;
+    }
+    .header-right{
+        background-color: #0d1117;
+    }
+    
+    .header-container img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 80px;
+        width: 80px;
+        
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 0 10px #1f7aff40;
+    }
+
+    .settings-icon {
+            cursor: pointer;
+            padding: 10px;
+        }
+
+    .settings-icon i {
+            position: absolute;
+            right: 20px;
+            font-size: 24px;
+            color: #1f7aff;
+    }
+    
+    
+    
+    /* Main Content */
+    .main-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 450px;
+        background-color: #151522;
+        color: white;
+        border: 2px solid #1f7aff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #1f7aff40;
+       
+    }
+    
+    /* Footer */
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: #151522;
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        margin-top: 20px;
+        position: relative;
+    }
+    
+    .footer-top {
+        width: 100%;
+        height: 50px;
+        background-color: #1e1e2f;
+       
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .footer-bottom {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 50px;
+    }
+
+    .btn1,
+    .btn2,
+    .btn3,
+    .btn4,
+    .btn5 {
+            padding: 10px 20px;
+            background-color: #1f7aff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .b:hover {
+            background-color: #957dfa;
+        }
+    
+    .footer-icon {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        font-size: 24px;
+        color: #1f7aff;
+        cursor: pointer;
+    }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="header-container">
+        <div class="header-left"></div>
+        <img src="logo.jpg" alt="Logo">
+        <div class="header-right">
+            <div class="settings-icon">
+                <i class="fa-solid fa-gear"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content"></div>
+    
+    
+    
+    <div class="footer-container">
+        <div class="footer-top"></div>
+        <div class="footer-bottom">
+            <button class="btn1 b">1</button>
+            <button class="btn2 b">2</button>
+            <button class="btn3 b">3</button>
+            <button class="btn4 b">4</button>
+            <button class="btn5 b">5</button>
+        </div>
+        <div class="footer-icon">
+            <i class="fa-solid fa-circle-left"></i>
+        </div>
+    </div>
+</body>
+</html>
