@@ -268,29 +268,29 @@ def get_prediction(company_ticker):
     
     return tomorrow_predictions, next_month_predictions, conf_low, conf_high, market_trend, None
 
-# if __name__ == "__main__":
-#     company = input("Enter stock ticker (e.g., TSLA, NVTK.ME, TCS.NS, SBIN.BO): ")
+if __name__ == "__main__":
+    company = input("Enter stock ticker (e.g., TSLA, NVTK.ME, TCS.NS, SBIN.BO): ")
     
-#     tomorrow_predictions, next_month_predictions, conf_low, conf_high, market_trend, message = get_prediction(company)
+    tomorrow_predictions, next_month_predictions, conf_low, conf_high, market_trend, message = get_prediction(company)
     
-#     if message:
-#         print(f"\n🚨 {message}")
-#     else:
-#         print(f"\nMarket Condition for Next Month: **{market_trend}**")
-#         print(f"\nPredicted Opening Price for Tomorrow: {tomorrow_predictions[0]:.2f}")
-#         print(f"Predicted Closing Price for Tomorrow: {tomorrow_predictions[1]:.2f}")
-#         print(f"\nPredicted Closing Prices for Next Month (Aggregated): {next_month_predictions}")
-#         print(f"\nConfidence Interval for Tomorrow: {conf_low:.2f} - {conf_high:.2f}")
+    if message:
+        print(f"\n🚨 {message}")
+    else:
+        print(f"\nMarket Condition for Next Month: **{market_trend}**")
+        print(f"\nPredicted Opening Price for Tomorrow: {tomorrow_predictions[0]:.2f}")
+        print(f"Predicted Closing Price for Tomorrow: {tomorrow_predictions[1]:.2f}")
+        print(f"\nPredicted Closing Prices for Next Month (Aggregated): {next_month_predictions}")
+        print(f"\nConfidence Interval for Tomorrow: {conf_low:.2f} - {conf_high:.2f}")
     
     
-#     run_evaluation = input("\nWould you like to run a backtesting evaluation? (yes/no): ").strip().lower()
-#     if run_evaluation in ['yes', 'y']:
-#         eval_data = yf.download(company, start="2020-01-01", end=datetime.today().strftime('%Y-%m-%d'))
-#         eval_data = compute_technical_indicators(eval_data)
-#         eval_data.dropna(inplace=True)
-#         eval_data = prepare_tomorrow_prediction(eval_data)
-#         processed_eval_data, _ = preprocess_data(eval_data)
-#         eval_labels = eval_data[["Tomorrow_Open", "Tomorrow_Close"]].values
+    run_evaluation = input("\nWould you like to run a backtesting evaluation? (yes/no): ").strip().lower()
+    if run_evaluation in ['yes', 'y']:
+        eval_data = yf.download(company, start="2020-01-01", end=datetime.today().strftime('%Y-%m-%d'))
+        eval_data = compute_technical_indicators(eval_data)
+        eval_data.dropna(inplace=True)
+        eval_data = prepare_tomorrow_prediction(eval_data)
+        processed_eval_data, _ = preprocess_data(eval_data)
+        eval_labels = eval_data[["Tomorrow_Open", "Tomorrow_Close"]].values
 #         _, metrics = evaluate_models(processed_eval_data, eval_labels)
     
 #     print("\nTHANKS 💛")
