@@ -291,6 +291,6 @@ if __name__ == "__main__":
         eval_data = prepare_tomorrow_prediction(eval_data)
         processed_eval_data, _ = preprocess_data(eval_data)
         eval_labels = eval_data[["Tomorrow_Open", "Tomorrow_Close"]].values
-#         _, metrics = evaluate_models(processed_eval_data, eval_labels)
+        _, metrics = evaluate_models(processed_eval_data, eval_labels)
     
-#     print("\nTHANKS 💛")
+    print("\nTHANKS 💛")
