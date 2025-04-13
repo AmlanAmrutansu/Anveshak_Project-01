@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finovex</title>
+    <title>StockHub - Home</title>
 
     <!-- Link to shared CSS file -->
     <link rel="stylesheet" href="styles/common.css">
-    <!-- FontAwesome for icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></script>
+    <!-- Link to FontAwesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Link to Lottie Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js" defer></script>
     <!-- Link to shared JavaScript file -->
     <script src="scripts/common.js" defer></script>
 </head>
 <body>
+    <!-- Header Section -->
     <div class="header-container">
         <div class="header-left"></div>
         <img src="logo.jpg" alt="Logo">
@@ -23,16 +26,34 @@
         </div>
     </div>
 
+    <!-- Main Content Section with Graphics -->
     <div class="main-content">
-        <h1>Welcome to Finovex</h1>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <h1>Welcome to StockHub</h1>
+            <p>Your one-stop solution for stock predictions and analysis.</p>
+        </div>
+        <!-- Adding a Lottie Animation -->
+        <div id="lottie-graphic" style="height: 300px; width: 300px; margin: 0 auto;"></div>
+        <script>
+            // Load Lottie Animation
+            const lottieContainer = document.getElementById('lottie-graphic');
+            lottie.loadAnimation({
+                container: lottieContainer,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'https://assets5.lottiefiles.com/packages/lf20_q5pk6p1k.json' // Replace with a stock/finance animation
+            });
+        </script>
     </div>
 
+    <!-- Footer Section with Buttons -->
     <div class="footer-container">
         <!-- Footer Buttons -->
         <div class="footer-buttons">
-            <button class="footer-button" onclick="openNewTab('StockHub.html')">Stock Hub</button>
-            <button class="footer-button" onclick="openNewTab('tutorial.html')">Tutorial</button>
-            <button class="footer-button" onclick="openNewTab('AiChat.html')">AI Chat</button>
+            <button class="footer-button" onclick="openNewTab('StockHub.html')"><i class="fa-solid fa-chart-line"></i> Stock Hub</button>
+            <button class="footer-button" onclick="openNewTab('tutorial.html')"><i class="fa-solid fa-graduation-cap"></i> Tutorial</button>
+            <button class="footer-button" onclick="openNewTab('AiChat.html')"><i class="fa-solid fa-comments"></i> AI Chat</button>
         </div>
         <!-- Footer Back Icon -->
         <div class="footer-icon">
