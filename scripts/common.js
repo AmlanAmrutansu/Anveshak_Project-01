@@ -7,10 +7,12 @@ function openNewTab(url) {
 async function fetchData(url, options = {}) {
     try {
         const response = await fetch(url, options);
+        if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
         return await response.json();
     } catch (error) {
         console.error("Error fetching data:", error);
         alert("An error occurred while fetching data.");
+        return null;
     }
 }
 
