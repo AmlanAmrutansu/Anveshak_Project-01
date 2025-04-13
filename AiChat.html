@@ -55,7 +55,6 @@
     .bubble {
       padding: 12px 18px;
       border-radius: 20px;
-      position: relative;
       font-size: 16px;
       line-height: 1.4;
       word-wrap: break-word;
@@ -124,7 +123,7 @@
       return now.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
     }
     
-    // Function to append a message to the chat window
+    // Append a message to the chat window
     function appendMessage(sender, text) {
       const chatMessages = document.getElementById('chatMessages');
       const messageDiv = document.createElement('div');
@@ -146,7 +145,7 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     
-    // Function to send a message to the ML.py /chat endpoint
+    // Send the user message to the ML.py /chat endpoint and display response
     async function sendMessage() {
       const input = document.getElementById('chatInput');
       const message = input.value.trim();
@@ -156,7 +155,7 @@
       input.value = '';
       
       try {
-        const response = await fetch('http://127.0.0.1:5000/chat', {
+        const response = await fetch('/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: message })
