@@ -7,9 +7,9 @@
   <link rel="stylesheet" href="styles/common.css" />
   <script src="scripts/common.js" defer></script>
   <style>
-    /* Chat page styling inspired by ChatGPT/Copilot UI while using the same color scheme as the rest of the app */
+    /* Chat page styling inspired by ChatGPT/Copilot UI with unified color scheme */
     body {
-      background-color: #151522; /* match common dark background */
+      background-color: #151522;
       margin: 0;
       font-family: Arial, sans-serif;
       color: #fff;
@@ -128,7 +128,7 @@
       <!-- Chat messages will appear here -->
     </div>
     <div class="chat-input-container">
-      <input id="chatInput" class="chat-input" type="text" placeholder="Type your message here..." />
+      <input id="chatInput" class="chat-input" type="text" placeholder="Type your message or 'stock: TICKER'..." />
       <button id="chatSendBtn" class="chat-send-btn">Send</button>
     </div>
   </div>
@@ -161,7 +161,7 @@
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     
-    // Send the user message to the ML.py /chat endpoint and display response
+    // Send message to backend
     async function sendMessage() {
       const input = document.getElementById('chatInput');
       const message = input.value.trim();
@@ -170,21 +170,43 @@
       appendMessage('User', message);
       input.value = '';
       
-      try {
-        const response = await fetch('/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: message })
-        });
-        const data = await response.json();
-        if (data && data.reply) {
-          appendMessage('AI', data.reply);
-        } else {
-          appendMessage('AI', 'Sorry, I did not understand that.');
+      // Check if the message is a stock query (prefix "stock:")
+      if (message.toLowerCase().startsWith("stock:")) {
+        const ticker = message.split(":")[1].trim();
+        try {
+          const response = await fetch(`/predict/${ticker}`);
+          const data = await response.json();
+          if (data.error) {
+            appendMessage('AI', data.error);
+          } else {
+            const resultText = `Ticker: ${data.ticker}
+Predicted Opening Price: ${data.tomorrow_prediction.opening.toFixed(2)}
+Predicted Closing Price: ${data.tomorrow_prediction.closing.toFixed(2)}
+Market Trend: ${data.market_trend}`;
+            appendMessage('AI', resultText);
+          }
+        } catch (error) {
+          console.error('Error fetching stock prediction:', error);
+          appendMessage('AI', 'Error: Unable to retrieve stock prediction.');
         }
-      } catch (error) {
-        console.error('Error communicating with AI:', error);
-        appendMessage('AI', 'Error: Unable to reach AI service.');
+      } else {
+        // Default chat input using /chat endpoint.
+        try {
+          const response = await fetch('/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: message })
+          });
+          const data = await response.json();
+          if (data && data.reply) {
+            appendMessage('AI', data.reply);
+          } else {
+            appendMessage('AI', 'Sorry, I did not understand that.');
+          }
+        } catch (error) {
+          console.error('Error communicating with AI:', error);
+          appendMessage('AI', 'Error: Unable to reach AI service.');
+        }
       }
     }
     
