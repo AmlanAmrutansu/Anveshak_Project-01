@@ -222,5 +222,41 @@
         </div>
         
     </div>
+
+    <script>
+document.querySelector(".btns1").addEventListener("click", async () => {
+    const queryText = document.querySelector(".que").value;
+    if (!queryText) return alert("Please enter a stock symbol");
+
+    try {
+        const res = await fetch("http://127.0.0.1:5000/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ ticker: queryText })
+        });
+
+        const data = await res.json();
+        if (data.error) {
+            alert("⚠️ " + data.error);
+            return;
+        }
+
+        alert(`
+Market Trend: ${data.market_trend}
+Tomorrow Open: ₹${data.tomorrow_open.toFixed(2)}
+Tomorrow Close: ₹${data.tomorrow_close.toFixed(2)}
+Next Month Prediction: ${data.next_month.map(x => "₹" + x.toFixed(2)).join(", ")}
+Confidence Range: ₹${data.confidence_range[0].toFixed(2)} - ₹${data.confidence_range[1].toFixed(2)}
+        `);
+
+    } catch (err) {
+        console.error(err);
+        alert("Server error");
+    }
+});
+</script>
+
 </body>
 </html>
