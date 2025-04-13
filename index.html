@@ -3,157 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document1</title>
+    <title>Index</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0d0b14;
-    color: white;
-    width: 100%;
-}
-
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 30px;
-    background-color: #151522;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-}
-
-.header-left,
-.header-right {
-    display: flex;
-    align-items: center;
-}
-
-.header-container img {
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(113, 81, 245, 0.8);
-}
-
-.settings-icon {
-    cursor: pointer;
-    padding: 10px;
-}
-
-.settings-icon i {
-    font-size: 24px;
-    color: #1f7aff;
-}
-
-.navigation-menu {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    background-color: #1e1e2f;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-.navigation-menu > div {
-    padding: 10px 20px;
-    background-color: #2a2a3d;
-    color: white;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 8px rgba(31, 122, 255, 0.4);
-}
-
-.navigation-menu > div:hover {
-    background-color: #1f7aff;
-    color: white;
-}
-
-.main-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 450px;
-    padding: 30px;
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-.list-container {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 15px;
-    background-color: #1e1e2f;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-.list-left,
-.list-right {
-    width: 45%;
-    padding: 20px;
-    background-color: #2a2a3d;
-    border-radius: 12px;
-    color: white;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(31, 122, 255, 0.2);
-}
-
-.list-left:hover,
-.list-right:hover {
-    background-color: #1f7aff;
-    color: white;
-}
-
-.footer-container {
-    background-color: #151522;
-    padding: 20px;
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-}
-
-.footer-top {
-    height: 40px;
-    background-color: #1e1e2f;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 8px rgba(31, 122, 255, 0.4);
-}
-
-.footer-bottom {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 20px;
-}
-
-.footer-button {
-    padding: 10px 20px;
-    background-color: #1f7aff;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.footer-button:hover {
-    background-color: #957dfa;
-}
-
-
-    </style>
+    <!-- Link to shared CSS file -->
+    <link rel="stylesheet" href="styles/common.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></script>
+    <!-- Link to shared JavaScript file -->
+    <script src="scripts/common.js" defer></script>
 </head>
 <body>
     <div class="header-container">
@@ -167,38 +23,19 @@ body {
     </div>
 
     <div class="navigation-menu">
-        <div class="menu-item1"></div>
-        <div class="menu-item2"></div>
-        <div class="menu-item3"></div>
-        <div class="menu-item4"></div>
+        <button onclick="openNewTab('StockHub.html')">Stock Hub</button>
+        <button onclick="openNewTab('tutorial.html')">Tutorial</button>
+        <button onclick="openNewTab('AiChat.html')">AI Chat</button>
     </div>
 
-    <div class="main-content"></div>
-
-    <div class="list-container">
-        <div class="list-left">Exchange</div>
-        <div class="list-right">Wallet</div>
+    <div class="main-content">
+        <h1>Welcome to StockHub</h1>
     </div>
 
     <div class="footer-container">
-        <div class="footer-top"></div>
-        <div class="footer-bottom">
-            <button class="footer-button" onclick="openNewTab1()">Stock-hub</button>
-            <button class="footer-button" onclick="openNewTab2()">Tutorial</button>
-            <button class="footer-button" onclick="openNewTab3()">AI Chat</button>
+        <div class="footer-icon">
+            <i class="fa-solid fa-circle-left"></i>
         </div>
     </div>
-
-    <script>
-    function openNewTab1() {
-        window.open("StockHub.html", "_self");
-    }
-    function openNewTab2() {
-        window.open("tutorial.html", "_self");
-    }
-    function openNewTab3() {
-        window.open("AiChat.html", "_self");
-    }
-    </script>
 </body>
 </html>
