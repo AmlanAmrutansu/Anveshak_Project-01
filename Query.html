@@ -3,64 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Query Page</title>
-
-    <!-- Link to shared CSS -->
+    <title>Stock Query</title>
+    <!-- We assume styles/common.css is already linked in index.html, so we include only page-specific styling here if needed -->
     <link rel="stylesheet" href="styles/common.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></script>
-    <!-- Link to shared JavaScript -->
+    <!-- Use common.js for shared functions (like fetchData & openNewTab) -->
     <script src="scripts/common.js" defer></script>
 </head>
 <body>
     <div class="header-container">
-        <div class="header-left"></div>
         <img src="logo.jpg" alt="Logo">
-        <div class="header-right">
-            <h3>Query</h3>
-            <div class="settings-icon">
-                <i class="fa-solid fa-gear"></i>
-            </div>
-        </div>
+        <h2 style="color:#fff;">Stock Query</h2>
     </div>
 
-    <div class="main-content">
-        <div class="query">
-            <textarea class="que" placeholder="Enter Stock Symbol"></textarea>
-        </div>
-        <div class="btns">
-            <button class="btns1" onclick="handleQuery()">Search</button>
-        </div>
+    <div class="main-content" style="padding: 20px;">
+        <h1>Enter a Stock Symbol for Prediction</h1>
+        <textarea class="que" style="width:80%; height:100px; margin-top:20px;" placeholder="For example: AAPL"></textarea>
+        <br>
+        <button class="footer-button" onclick="handleQuery()">Search</button>
     </div>
 
     <div class="footer-container">
-        <div class="footer-icon">
-            <i class="fa-solid fa-circle-left"></i>
+        <!-- You can reuse footer buttons here if needed -->
+        <div class="footer-buttons">
+            <button class="footer-button" onclick="openNewTab('StockHub.html')">
+                <i class="fa-solid fa-chart-line"></i> Stock Hub
+            </button>
+            <button class="footer-button" onclick="openNewTab('tutorial.html')">
+                <i class="fa-solid fa-graduation-cap"></i> Tutorial
+            </button>
+            <button class="footer-button" onclick="openNewTab('AiChat.html')">
+                <i class="fa-solid fa-comments"></i> AI Chat
+            </button>
         </div>
     </div>
 
     <script>
-        async function handleQuery() {
-            const queryText = document.querySelector(".que").value;
-            if (!queryText) return alert("Please enter a stock symbol");
-
-            const data = await fetchData("http://127.0.0.1:5000/predict", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ticker: queryText })
-            });
-
-            if (data && !data.error) {
-                alert(`
-                    Market Trend: ${data.market_trend}
-                    Tomorrow Open: ₹${data.tomorrow_open.toFixed(2)}
-                    Tomorrow Close: ₹${data.tomorrow_close.toFixed(2)}
-                    Next Month Prediction: ${data.next_month.map(x => "₹" + x.toFixed(2)).join(", ")}
-                    Confidence Range: ₹${data.confidence_range[0].toFixed(2)} - ₹${data.confidence_range[1].toFixed(2)}
-                `);
-            } else if (data && data.error) {
-                alert(`⚠️ ${data.error}`);
-            }
-        }
+      // Sends a POST request to the Flask '/predict' endpoint with the given ticker.
+      async function handleQuery() {
+          const queryText = document.querySelector('.que').value.trim();
+          if (!queryText) {
+              alert("Please enter a stock symbol.");
+              return;
+          }
+          try {
+              const data = await fetchData("http://127.0.0.1:5000/predict", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ ticker: queryText })
+              });
+              if (data && !data.error) {
+                  alert(`Prediction Results:
+Market Trend: ${data.market_trend}
+Tomorrow Open: ₹${data.tomorrow_open.toFixed(2)}
+Tomorrow Close: ₹${data.tomorrow_close.toFixed(2)}
+Next Month Predictions: ${data.next_month.map(x => "₹" + x.toFixed(2)).join(", ")}
+Confidence Range: ₹${data.confidence_range[0].toFixed(2)} - ₹${data.confidence_range[1].toFixed(2)}
+                  `);
+              } else if (data && data.error) {
+                  alert(`Error: ${data.error}`);
+              }
+          } catch (error) {
+              console.error("Error in handleQuery:", error);
+              alert("An unexpected error occurred. Please try again later.");
+          }
+      }
     </script>
 </body>
 </html>
