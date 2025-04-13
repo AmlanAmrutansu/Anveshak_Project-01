@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Chat</title>
+  <title>AI Chat - Stock Prediction</title>
   <link rel="stylesheet" href="styles/common.css" />
   <script src="scripts/common.js" defer></script>
   <style>
-    /* Chat page styling inspired by ChatGPT/Copilot UI with unified color scheme */
+    /* Chat page styling using unified color scheme */
     body {
       background-color: #151522;
       margin: 0;
@@ -125,15 +125,15 @@
   </div>
   <div class="chat-container">
     <div id="chatMessages" class="chat-messages">
-      <!-- Chat messages will appear here -->
+      <!-- Chat messages appear here -->
     </div>
     <div class="chat-input-container">
-      <input id="chatInput" class="chat-input" type="text" placeholder="Type your message or 'stock: TICKER'..." />
+      <input id="chatInput" class="chat-input" type="text" placeholder="Enter stock ticker (ex: stock: TSLA)" />
       <button id="chatSendBtn" class="chat-send-btn">Send</button>
     </div>
   </div>
   <script>
-    // Helper to get the current timestamp (formatted for display)
+    // Helper to get current timestamp formatted for display
     function getCurrentTimestamp() {
       const now = new Date();
       return now.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
@@ -157,11 +157,11 @@
       messageDiv.appendChild(timeDiv);
       chatMessages.appendChild(messageDiv);
       
-      // Scroll to the bottom whenever a new message is added
+      // Auto-scroll to the bottom
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     
-    // Send message to backend
+    // Send message function which checks if input is a stock ticker query
     async function sendMessage() {
       const input = document.getElementById('chatInput');
       const message = input.value.trim();
@@ -170,7 +170,7 @@
       appendMessage('User', message);
       input.value = '';
       
-      // Check if the message is a stock query (prefix "stock:")
+      // If message starts with "stock:" then treat it as a stock ticker query
       if (message.toLowerCase().startsWith("stock:")) {
         const ticker = message.split(":")[1].trim();
         try {
@@ -190,7 +190,7 @@ Market Trend: ${data.market_trend}`;
           appendMessage('AI', 'Error: Unable to retrieve stock prediction.');
         }
       } else {
-        // Default chat input using /chat endpoint.
+        // For other messages, you can fallback to a default chat service (if available)
         try {
           const response = await fetch('/chat', {
             method: 'POST',
@@ -210,7 +210,7 @@ Market Trend: ${data.market_trend}`;
       }
     }
     
-    // Event listeners for sending message
+    // Event listeners for sending message via button click or pressing Enter
     document.getElementById('chatSendBtn').addEventListener('click', sendMessage);
     document.getElementById('chatInput').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
