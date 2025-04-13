@@ -132,15 +132,19 @@
     <span>AI Chat</span>
     <button class="back-button" onclick="window.location.href='index.html'">Back</button>
   </div>
-  <div class="chat-input-container">
-  <input type="text" class="chat-input" placeholder="Enter stock ticker (e.g., TSLA)" />
-  <button class="chat-send-btn">Send</button>
-</div>
+  <div class="chat-container">
+    <div class="chat-messages" id="chatMessages">
+      <!-- Chat messages will appear here dynamically -->
+    </div>
+    <div class="chat-input-container">
+      <input id="chatInput" type="text" class="chat-input" placeholder="Enter stock ticker (e.g., TSLA)" />
+      <button id="chatSendBtn" class="chat-send-btn">Send</button>
+    </div>
   </div>
   <script>
     function getCurrentTimestamp() {
       const now = new Date();
-      return now.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+      return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
     
     function appendMessage(sender, text) {
@@ -173,14 +177,17 @@
       if (message.toLowerCase().startsWith("stock:")) {
         const ticker = message.split(":")[1].trim();
         try {
-          const response = await fetch(`/predict/${ticker}`);
+          const response = await fetch(`/predict/${ticker}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+          });
           const data = await response.json();
           if (data.error) {
             appendMessage('AI', data.error);
           } else {
             const resultText = `Ticker: ${data.ticker}
-Predicted Opening Price: ${data.tomorrow_prediction.opening.toFixed(2)}
-Predicted Closing Price: ${data.tomorrow_prediction.closing.toFixed(2)}
+Predicted Opening Price: ${data.predictions.open.toFixed(2)}
+Predicted Closing Price: ${data.predictions.close.toFixed(2)}
 Market Trend: ${data.market_trend}`;
             appendMessage('AI', resultText);
           }
@@ -193,7 +200,7 @@ Market Trend: ${data.market_trend}`;
           const response = await fetch('/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: message })
+            body: JSON.stringify({ message })
           });
           const data = await response.json();
           if (data && data.reply) {
