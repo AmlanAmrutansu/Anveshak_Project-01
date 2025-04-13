@@ -1,184 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Document6</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0d0b14;
-      color: white;
-      width: 100%;
-    }
-
-    .content-wrapper {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .header {
-      height: 70px;
-      background-color: #151522;
-      
-      box-shadow: 0 0 10px #1f7aff40;
-      border-radius: 10px;
-      position: relative;
-      margin-top: 20px;
-    }
-
-    .logo {
-      position: absolute;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 80px;
-      width: 80px;
-      color: #1f7aff;
-      border-radius: 50%;
-      background-color: white;
-      z-index: 10;
-      box-shadow: 0 0 10px #1f7aff40;
-    }
-
-    .top-boxes {
-      margin-top: 100px;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      width: 100%;
-      gap: 20px;
-    }
-
-    .box {
-      width: 100%;
-      max-width: 500px;
-      height: 60px;
-      background-color: #2a2a3d;
-      
-      border-radius: 12px;
-      box-shadow: 0 0 10px #1f7aff40;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .box:hover {
-      background-color: #1f7aff;
-    }
-
-    .bar-chart {
-      display: flex;
-      justify-content: space-around;
-      align-items: flex-end;
-      height: 300px;
-      padding: 10px;
-      width: 100%;
-      background-color: #1e1e2f;
-      
-      border-radius: 12px;
-      box-shadow: 0 0 10px #1f7aff40;
-      margin-top: 20px;
-    }
-
-    .content-box {
-      height: 120px;
-      background-color: #2a2a3d;
-     
-      border-radius: 12px;
-      box-shadow: 0 0 10px #1f7aff40;
-      width: 100%;
-      margin-top: 20px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .content-box:hover {
-      background-color: #1f7aff;
-    }
-
-    .footer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 50px;
-      
-      background-color: #151522;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #1f7aff40;
-      margin-top: 20px;
-      padding: 0 20px;
-    }
-
-    .footer-button {
-      width: 80px;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #1f7aff;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 10px #1f7aff40;
-      color: white;
-    }
-
-    .footer-button:hover {
-      background-color: #957dfa;
-    }
-
-    .footer-icon {
-      position: absolute;
-      right: 20px;
-      font-size: 30px;
-      color: #1f7aff;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      
-    }
-
-    .footer-icon:hover {
-      color: #957dfa;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Chat</title>
+    <link rel="stylesheet" href="styles/common.css" />
+    <script src="scripts/common.js" defer></script>
+    <style>
+        /* Additional styling for AI Chat page */
+        .chat-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #151522;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        .chat-window {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #0d0b14;
+            border: 1px solid #1f7aff;
+            border-radius: 5px;
+        }
+        .chat-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #1f7aff;
+            background: #0d0b14;
+            color: #fff;
+        }
+        .chat-send-btn {
+            padding: 10px 15px;
+            background-color: #1f7aff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-  <div class="content-wrapper">
-    <div class="header"></div>
-    <img class="logo" src="logo.jpg" alt="Logo">
-
-    <div class="top-boxes">
-      <div class="box"></div>
-      <div class="box"></div>
+    <!-- Header -->
+    <div class="header-container">
+        <img src="logo.jpg" alt="Logo" />
+        <h2 style="color:#fff;">AI Chat</h2>
     </div>
 
-    <div class="bar-chart"></div>
-
-    <div class="content-box"></div>
-
-    <div class="footer">
-      <button class="footer-button">Click</button>
-      <div class="footer-icon">
-        <i class="fa-solid fa-circle-left"></i>
-      </div>
+    <!-- Main Content: Chat Window -->
+    <div class="main-content">
+        <div class="chat-container">
+            <div id="chatWindow" class="chat-window"></div>
+            <input id="chatInput" class="chat-input" type="text" placeholder="Type your message here..." />
+            <button id="chatSendBtn" class="chat-send-btn">Send</button>
+        </div>
     </div>
-  </div>
 
-  <script>
-    function openNewTab() {
-      window.open('index.html', '_self');
-    }
+    <!-- Footer -->
+    <div class="footer-container">
+        <div class="footer-buttons">
+            <button class="footer-button" onclick="openNewTab('StockHub.html')">
+                <i class="fa-solid fa-chart-line"></i> Stock Hub
+            </button>
+            <button class="footer-button" onclick="openNewTab('tutorial.html')">
+                <i class="fa-solid fa-graduation-cap"></i> Tutorial
+            </button>
+            <button class="footer-button" onclick="openNewTab('index.html')">
+                <i class="fa-solid fa-home"></i> Home
+            </button>
+        </div>
+    </div>
 
-    document.querySelector('.footer-icon').addEventListener('click', openNewTab);
-  </script>
+    <script>
+        // Set up event listeners for sending messages
+        document.getElementById('chatSendBtn').addEventListener('click', sendMessage);
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Function to send a message to the AI endpoint
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            appendMessage('You', message);
+            input.value = '';
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+                const data = await response.json();
+                if (data && data.reply) {
+                    appendMessage('AI', data.reply);
+                } else {
+                    appendMessage('AI', 'Sorry, I did not understand that.');
+                }
+            } catch (error) {
+                console.error('Error communicating with AI:', error);
+                appendMessage('AI', 'Error: Unable to reach AI service.');
+            }
+        }
+
+        // Function to append messages to the chat window
+        function appendMessage(sender, text) {
+            const chatWindow = document.getElementById('chatWindow');
+            const msgDiv = document.createElement('div');
+            msgDiv.style.marginBottom = '10px';
+            msgDiv.textContent = sender + ': ' + text;
+            chatWindow.appendChild(msgDiv);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+    </script>
 </body>
 </html>
