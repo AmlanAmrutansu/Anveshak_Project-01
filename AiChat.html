@@ -1,125 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Chat</title>
-    <link rel="stylesheet" href="styles/common.css" />
-    <script src="scripts/common.js" defer></script>
-    <style>
-        /* Additional styling for AI Chat page */
-        .chat-container {
-            max-width: 600px;
-            margin: 20px auto;
-            background-color: #151522;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        }
-        .chat-window {
-            max-height: 400px;
-            overflow-y: auto;
-            margin-bottom: 20px;
-            padding: 10px;
-            background: #0d0b14;
-            border: 1px solid #1f7aff;
-            border-radius: 5px;
-        }
-        .chat-input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #1f7aff;
-            background: #0d0b14;
-            color: #fff;
-        }
-        .chat-send-btn {
-            padding: 10px 15px;
-            background-color: #1f7aff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            color: #fff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chat</title>
+  <link rel="stylesheet" href="styles/common.css" />
+  <script src="scripts/common.js" defer></script>
+  <style>
+    /* Chat page styling inspired by ChatGPT/Copilot UI */
+    body {
+      background-color: #F7F7F8;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .chat-header {
+      background-color: #343541;
+      color: #fff;
+      padding: 10px 20px;
+      text-align: center;
+      font-size: 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      border-bottom: 1px solid #444;
+    }
+    .chat-container {
+      margin-top: 60px;
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 60px);
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      background: #ececec;
+    }
+    .message {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-width: 80%;
+    }
+    .message.user {
+      align-self: flex-end;
+      text-align: right;
+    }
+    .message.ai {
+      align-self: flex-start;
+      text-align: left;
+    }
+    .bubble {
+      padding: 12px 18px;
+      border-radius: 20px;
+      position: relative;
+      font-size: 16px;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+    .user .bubble {
+      background-color: #0084ff;
+      color: #fff;
+      border-bottom-right-radius: 0;
+    }
+    .ai .bubble {
+      background-color: #fff;
+      color: #000;
+      border: 1px solid #ccc;
+      border-bottom-left-radius: 0;
+    }
+    .timestamp {
+      font-size: 12px;
+      color: #888;
+    }
+    .chat-input-container {
+      padding: 10px 20px;
+      background: #f1f1f1;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #ddd;
+    }
+    .chat-input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 16px;
+    }
+    .chat-send-btn {
+      margin-left: 10px;
+      padding: 12px 20px;
+      background-color: #343541;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .chat-send-btn:hover {
+      background-color: #4e4c57;
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <div class="header-container">
-        <img src="logo.jpg" alt="Logo" />
-        <h2 style="color:#fff;">AI Chat</h2>
+  <div class="chat-header">
+    AI Chat
+  </div>
+  <div class="chat-container">
+    <div id="chatMessages" class="chat-messages">
+      <!-- Chat messages will appear here -->
     </div>
-
-    <!-- Main Content: Chat Window -->
-    <div class="main-content">
-        <div class="chat-container">
-            <div id="chatWindow" class="chat-window"></div>
-            <input id="chatInput" class="chat-input" type="text" placeholder="Type your message here..." />
-            <button id="chatSendBtn" class="chat-send-btn">Send</button>
-        </div>
+    <div class="chat-input-container">
+      <input id="chatInput" class="chat-input" type="text" placeholder="Type your message here..." />
+      <button id="chatSendBtn" class="chat-send-btn">Send</button>
     </div>
-
-    <!-- Footer -->
-    <div class="footer-container">
-        <div class="footer-buttons">
-            <button class="footer-button" onclick="openNewTab('StockHub.html')">
-                <i class="fa-solid fa-chart-line"></i> Stock Hub
-            </button>
-            <button class="footer-button" onclick="openNewTab('tutorial.html')">
-                <i class="fa-solid fa-graduation-cap"></i> Tutorial
-            </button>
-            <button class="footer-button" onclick="openNewTab('index.html')">
-                <i class="fa-solid fa-home"></i> Home
-            </button>
-        </div>
-    </div>
-
-    <script>
-        // Set up event listeners for sending messages
-        document.getElementById('chatSendBtn').addEventListener('click', sendMessage);
-        document.getElementById('chatInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
+  </div>
+  <script>
+    // Helper to get the current timestamp (formatted for display)
+    function getCurrentTimestamp() {
+      const now = new Date();
+      return now.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    }
+    
+    // Function to append a message to the chat window
+    function appendMessage(sender, text) {
+      const chatMessages = document.getElementById('chatMessages');
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender.toLowerCase());
+      
+      const bubbleDiv = document.createElement('div');
+      bubbleDiv.classList.add('bubble');
+      bubbleDiv.textContent = text;
+      
+      const timeDiv = document.createElement('div');
+      timeDiv.classList.add('timestamp');
+      timeDiv.textContent = getCurrentTimestamp();
+      
+      messageDiv.appendChild(bubbleDiv);
+      messageDiv.appendChild(timeDiv);
+      chatMessages.appendChild(messageDiv);
+      
+      // Scroll to the bottom whenever a new message is added
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Function to send a message to the ML.py /chat endpoint
+    async function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const message = input.value.trim();
+      if (!message) return;
+      
+      appendMessage('User', message);
+      input.value = '';
+      
+      try {
+        const response = await fetch('http://127.0.0.1:5000/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: message })
         });
-
-        // Function to send a message to the AI endpoint
-        async function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            if (!message) return;
-
-            appendMessage('You', message);
-            input.value = '';
-
-            try {
-                const response = await fetch('http://127.0.0.1:5000/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: message })
-                });
-                const data = await response.json();
-                if (data && data.reply) {
-                    appendMessage('AI', data.reply);
-                } else {
-                    appendMessage('AI', 'Sorry, I did not understand that.');
-                }
-            } catch (error) {
-                console.error('Error communicating with AI:', error);
-                appendMessage('AI', 'Error: Unable to reach AI service.');
-            }
+        const data = await response.json();
+        if (data && data.reply) {
+          appendMessage('AI', data.reply);
+        } else {
+          appendMessage('AI', 'Sorry, I did not understand that.');
         }
-
-        // Function to append messages to the chat window
-        function appendMessage(sender, text) {
-            const chatWindow = document.getElementById('chatWindow');
-            const msgDiv = document.createElement('div');
-            msgDiv.style.marginBottom = '10px';
-            msgDiv.textContent = sender + ': ' + text;
-            chatWindow.appendChild(msgDiv);
-            chatWindow.scrollTop = chatWindow.scrollHeight;
-        }
-    </script>
+      } catch (error) {
+        console.error('Error communicating with AI:', error);
+        appendMessage('AI', 'Error: Unable to reach AI service.');
+      }
+    }
+    
+    // Event listeners for sending message
+    document.getElementById('chatSendBtn').addEventListener('click', sendMessage);
+    document.getElementById('chatInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+  </script>
 </body>
 </html>
