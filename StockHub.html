@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Advanced Stock Screener with Charts</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * {
@@ -125,6 +126,30 @@
         flex-direction: column;
       }
     }
+
+    .footer-container {
+      background-color: #151522;
+      padding: 20px;
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      position: relative;
+      margin: 20px;
+    }
+
+    .footer-icon {
+      position: absolute;
+      right: 20px;
+     bottom: -1px;
+      font-size: 30px;
+      color: #1f7aff;
+      cursor: pointer;
+    }
+
+    .footer-icon:hover {
+      color: #957dfa;
+    }
+
   </style>
 </head>
 <body>
@@ -167,6 +192,13 @@
   <canvas id="priceTrendChart" height="100"></canvas>
   <canvas id="marketCapChart" height="100"></canvas>
 </div>
+<div class="footer-container">
+  <div class="footer-bottom">
+    <div class="footer-icon">
+      <i class="fa-solid fa-circle-left"></i>
+    </div>
+  </div>
+
 
 <script>
   const stockData = [
@@ -269,6 +301,13 @@
   });
 
   displayStocks(stockData);
+
+  function openNewTab() {
+      window.open('intex.html', '_self');
+    }
+
+    document.querySelector('.footer-icon').addEventListener('click', openNewTab);
+
 </script>
 
 </body>
