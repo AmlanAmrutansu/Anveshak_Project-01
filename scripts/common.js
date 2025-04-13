@@ -16,6 +16,29 @@ async function fetchData(url, options = {}) {
     }
 }
 
+async function fetchPrediction(ticker) {
+    try {
+        const response = await fetch('http://localhost:5000/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ticker }),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to fetch predictions');
+        }
+
+        const data = await response.json();
+        return data; 
+    } catch (error) {
+        console.error('Error fetching prediction:', error);
+        return { error: error.message };
+    }
+}
+
 // Event Listener for Footer Icon
 document.querySelectorAll('.footer-icon').forEach(icon => {
     icon.addEventListener('click', () => openNewTab('index.html'));
